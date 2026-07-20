@@ -1,3 +1,6 @@
+#Compiled object files and binary files
 obj/
 bin/
 
+#User-specific files
+appsettings.json
