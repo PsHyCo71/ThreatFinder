@@ -7,7 +7,7 @@ public interface IThreatIntelProvider
     bool SupportsHash { get; }
     bool SupportsUrl { get; }
 
-    Task<EngineResult> CheckFileHashAsync(string sha256Hash);
+    Task<EngineResult> CheckFileHashAsync(string authKey, string sha256Hash);
 
-    Task<EngineResult> CheckUrlAsync(string url);
+    Task<EngineResult> CheckUrlAsync(string authKey, string url);
 }
