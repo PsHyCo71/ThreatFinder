@@ -38,7 +38,7 @@ public class URLhausProvider : IThreatIntelProvider
         var json = await response.Content.ReadAsStringAsync();
         var result = JsonSerializer.Deserialize<URLhausResponse>(json);
         if (result is null)
-            throw new Exception("MB returned an empty or invalid response.");
+            throw new Exception("MalwareBazaar returned an empty or invalid response.");
         return result;
     }
 
