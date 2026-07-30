@@ -1,16 +1,17 @@
 using System;
 using System.IO;
 using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace ThreatFinder.Core;
 
 public class ApiKeyProvider : IApiKeyProvider
 {
-    public string GetApiKey(string providerName)
+    public async Task<string> GetApiKeyAsync(string providerName)
     {
         if (File.Exists("appsettings.json"))
         {
-            string json = File.ReadAllText("appsettings.json");
+            string json = await File.ReadAllTextAsync("appsettings.json");
             var keys = JsonSerializer.Deserialize<AppSettings>(json);
 
             if
@@ -36,12 +37,12 @@ public class ApiKeyProvider : IApiKeyProvider
         }
     }
 
-    public void SaveApiKey(string providerName, string key)
+    public async Task SaveApiKeyAsync(string providerName, string key)
     {
         AppSettings keys;
         if (File.Exists("appsettings.json"))
         {
-            string json = File.ReadAllText("appsettings.json");
+            string json = await File.ReadAllTextAsync("appsettings.json");
             keys = JsonSerializer.Deserialize<AppSettings>(json) ?? new AppSettings();
         }
         else
@@ -61,6 +62,6 @@ public class ApiKeyProvider : IApiKeyProvider
                 throw new ArgumentException($"Unknown provider: {providerName}");
         }
 
-        File.WriteAllText("appsettings.json", JsonSerializer.Serialize(keys));
+        await File.WriteAllTextAsync("appsettings.json", JsonSerializer.Serialize(keys));
     }
 }

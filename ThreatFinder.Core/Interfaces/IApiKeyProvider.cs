@@ -4,6 +4,6 @@ namespace ThreatFinder.Core;
 
 public interface IApiKeyProvider
 {
-    string GetApiKey(string providerName);
-    void SaveApiKey(string providerName, string key);
+    Task<string> GetApiKeyAsync(string providerName);
+    Task SaveApiKeyAsync(string providerName, string key);
 }
