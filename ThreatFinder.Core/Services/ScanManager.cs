@@ -19,12 +19,12 @@ public class ScanManager
     public async Task<ScanResult> ScanHashAsync(string hash)
     {
         var applicableProviders = _providers.Where(p => p.SupportsHash);
-        var tasks = applicableProviders.Select(provider =>
+        var tasks = applicableProviders.Select(async provider =>
         {
             try
             {
-                string MBkey = _apiKeyProvider.GetApiKey(provider.Name);
-                return provider.CheckFileHashAsync(MBkey, hash);
+                string MBkey = await _apiKeyProvider.GetApiKeyAsync(provider.Name);
+                return await provider.CheckFileHashAsync(MBkey, hash);
             }
             catch (ApiKeyMissingException)
             {
@@ -32,7 +32,7 @@ public class ScanManager
             }
             catch (Exception ex)
             {
-                return Task.FromResult<EngineResult>(new ErrorResult(provider.Name) { Message = ex.Message });
+                return new ErrorResult(provider.Name) { Message = ex.Message };
             }
         });
 
@@ -44,12 +44,12 @@ public class ScanManager
     public async Task<ScanResult> ScanUrlAsync(string url)
     {
         var applicableProviders = _providers.Where(p => p.SupportsUrl);
-        var tasks = applicableProviders.Select(provider =>
+        var tasks = applicableProviders.Select(async provider =>
         {
             try
             {
-                string URLhauskey = _apiKeyProvider.GetApiKey(provider.Name);
-                return provider.CheckUrlAsync(URLhauskey, url);
+                string URLhauskey = await _apiKeyProvider.GetApiKeyAsync(provider.Name);
+                return await provider.CheckUrlAsync(URLhauskey, url);
             }
             catch (ApiKeyMissingException)
             {
@@ -57,7 +57,7 @@ public class ScanManager
             }
             catch (Exception ex)
             {
-                return Task.FromResult<EngineResult>(new ErrorResult(provider.Name) { Message = ex.Message });
+                return new ErrorResult(provider.Name) { Message = ex.Message };
             }
         });
 
