@@ -14,9 +14,7 @@ public partial class MainViewModel : ViewModelBase
     {
         _scanManager = scanManager;
     }
-
-    [ObservableProperty]
-    public partial string Greeting { get; set; } = "Welcome to Avalonia!";
+    
     [ObservableProperty]
     public partial ScanMode SelectedMode { get; set; }
     [ObservableProperty]

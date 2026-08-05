@@ -7,7 +7,8 @@
         x:Class="ThreatFinder.Views.MainWindow"
         x:DataType="vm:MainViewModel"
         Icon="../Assets/ThreatFinder_ico.ico"
-        Title="ThreatFinder">
+        Title="ThreatFinder"
+        Width="1280" Height="720">
 
     <Design.DataContext>
         <!-- This only sets the DataContext for the previewer in an IDE,
@@ -15,19 +16,96 @@
         <vm:MainViewModel />
     </Design.DataContext>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <Button>
-            Grid.Row="0"
-        </Button>
-        <Button>
-            Grid.Row="0"
-        </Button>
-    </Grid>
+    <Panel>
+        <Rectangle Fill="White" />
+
+        <Ellipse Width="1200" Height="1200"
+                 HorizontalAlignment="Center"
+                 VerticalAlignment="Center">
+            <Ellipse.Fill>
+                <RadialGradientBrush>
+                    <GradientStop Color="Blue" Offset="0" />
+                    <GradientStop Color="Cyan" Offset="0.5" />
+                    <GradientStop Color="Transparent" Offset="1" />
+                </RadialGradientBrush>
+            </Ellipse.Fill>
+        </Ellipse>
+
+        <Ellipse Width="400"
+                 Height="400"
+                 HorizontalAlignment="Right"
+                 VerticalAlignment="Bottom"
+                 Margin="0,0,-120,-170">
+            <Ellipse.Fill>
+                <RadialGradientBrush>
+                    <GradientStop Color="#6495ED" Offset="0" />
+                    <GradientStop Color="Cyan" Offset="0.5" />
+                    <GradientStop Color="Transparent" Offset="1" />
+                </RadialGradientBrush>
+            </Ellipse.Fill>
+        </Ellipse>
+
+        <Ellipse Width="400"
+                 Height="400"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Bottom"
+                 Margin="-120,0,0,-170">
+            <Ellipse.Fill>
+                <RadialGradientBrush>
+                    <GradientStop Color="#6495ED" Offset="0" />
+                    <GradientStop Color="Cyan" Offset="0.5" />
+                    <GradientStop Color="Transparent" Offset="1" />
+                </RadialGradientBrush>
+            </Ellipse.Fill>
+        </Ellipse>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,400,0,0">
+                <Button Margin="0,0,20,0" Padding="20,10" FontSize="16">URL</Button>
+                <Button Margin="20,0,0,0" Padding="20,10" FontSize="16">FILE</Button>
+            </StackPanel>
+            <TextBox Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="400" />
+            <Button Padding="20,10" FontSize="16" Grid.Row="2" HorizontalAlignment="Center" Margin="0,0,0,300">
+                SCAN
+            </Button>
+            <StackPanel Grid.Row="3"
+                        Orientation="Vertical"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Bottom"
+                        Margin="20,0,0,20">
+                <TextBlock FontSize="14" Foreground="Black" Margin="10,0,0,0">
+                    <Run Text="Powered by:&#10;MalwareBazaar &amp;&#10;URLhaus ("/>
+                    <InlineUIContainer BaselineAlignment="Baseline">
+                        <HyperlinkButton Content="abuse.ch"
+                                         NavigateUri="https://abuse.ch/"
+                                         Padding="0"
+                                         FontSize="14">
+                            <HyperlinkButton.RenderTransform>
+                                <TranslateTransform Y="3"/>
+                            </HyperlinkButton.RenderTransform>
+                        </HyperlinkButton>
+                    </InlineUIContainer>
+                    <Run Text=")"/>
+                </TextBlock>
+            </StackPanel>
+
+            <StackPanel Grid.Row="3"
+                        Orientation="Vertical"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Bottom"
+                        Margin="0,0,20,20">
+                <HyperlinkButton NavigateUri="https://github.com/PsHyCo71"
+                                 Content="My GitHub Profile"/>
+                <HyperlinkButton NavigateUri="https://github.com/PsHyCo71/ThreatFinder"
+                                 Content="Repository Page"/>
+            </StackPanel>
+        </Grid>
+    </Panel>
 
 </Window>
