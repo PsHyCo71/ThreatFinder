@@ -35,10 +35,11 @@ public class URLhausProvider : IThreatIntelProvider
         };
         request.Headers.Add("Auth-key", authKey);
         var response = await _httpClient.SendAsync(request);
+        HttpResponseValidator.EnsureSuccess(response, Name);
         var json = await response.Content.ReadAsStringAsync();
         var result = JsonSerializer.Deserialize<URLhausResponse>(json);
         if (result is null)
-            throw new Exception("MalwareBazaar returned an empty or invalid response.");
+            throw new Exception("URLhaus returned an empty or invalid response.");
         return result;
     }
 
@@ -51,7 +52,7 @@ public class URLhausProvider : IThreatIntelProvider
         {
             "ok" => new MaliciousResult("URLhaus")
             {
-                ThreatType = rawResponse.Threat ?? string.Empty ,
+                ThreatType = rawResponse.Threat ?? string.Empty,
                 Timestamp = rawResponse.DateAdded ?? string.Empty,
                 Tags = rawResponse.Tags ?? Array.Empty<string>()
             },
@@ -63,6 +64,6 @@ public class URLhausProvider : IThreatIntelProvider
             {
                 Message = $"Error: URLhaus endpoint returned the follwing error '{queryStatus}' "
             }
-        }; 
+        };
     }
 }

@@ -3,23 +3,23 @@
         xmlns:vm="using:ThreatFinder.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d"
+        d:DesignWidth="800"
+        d:DesignHeight="450"
         x:Class="ThreatFinder.Views.MainWindow"
         x:DataType="vm:MainViewModel"
         Icon="../Assets/ThreatFinder_ico.ico"
-        Title="ThreatFinder"
-        Width="1280" Height="720">
+        Title="ThreatFinder">
 
     <Design.DataContext>
-        <!-- This only sets the DataContext for the previewer in an IDE,
-        to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
         <vm:MainViewModel />
     </Design.DataContext>
 
     <Panel>
-        <Rectangle Fill="White" />
+        <Rectangle Fill="LightBlue" />
 
-        <Ellipse Width="1200" Height="1200"
+        <Ellipse Width="1200"
+                 Height="1200"
                  HorizontalAlignment="Center"
                  VerticalAlignment="Center">
             <Ellipse.Fill>
@@ -59,53 +59,95 @@
             </Ellipse.Fill>
         </Ellipse>
 
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,400,0,0">
-                <Button Margin="0,0,20,0" Padding="20,10" FontSize="16">URL</Button>
-                <Button Margin="20,0,0,0" Padding="20,10" FontSize="16">FILE</Button>
+        <!-- Control group: centered on the WHOLE window (via the Panel),
+        not sharing a Grid with the footer. This is what makes it
+        align with the ellipse, which is also centered on the Panel. -->
+        <StackPanel HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center">
+
+                <Button Margin="0,0,20,0"
+                        Padding="20,10"
+                        FontSize="16"
+                        CornerRadius="25">
+                    URL
+                </Button>
+
+                <Button Margin="20,0,0,0"
+                        Padding="20,10"
+                        FontSize="16"
+                        CornerRadius="25">
+                    FILE
+                </Button>
+
             </StackPanel>
-            <TextBox Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="400" />
-            <Button Padding="20,10" FontSize="16" Grid.Row="2" HorizontalAlignment="Center" Margin="0,0,0,300">
+
+            <TextBox HorizontalAlignment="Center"
+                     Margin="0,30,0,0"
+                     Width="400" />
+
+            <Button Padding="20,10"
+                    FontSize="16"
+                    HorizontalAlignment="Center"
+                    Margin="0,30,0,0"
+                    CornerRadius="25"
+                    Background="Red"
+                    Command="{Binding ScanAsync}">
                 SCAN
             </Button>
-            <StackPanel Grid.Row="3"
+
+        </StackPanel>
+
+        <!-- Footer: anchored independently to the bottom of the Panel,
+        so its height doesn't skew the control group's centering. -->
+        <Grid VerticalAlignment="Bottom"
+              ColumnDefinitions="*,*"
+              Margin="20,0,20,20">
+
+            <StackPanel Grid.Column="0"
                         Orientation="Vertical"
                         HorizontalAlignment="Left"
-                        VerticalAlignment="Bottom"
-                        Margin="20,0,0,20">
-                <TextBlock FontSize="14" Foreground="Black" Margin="10,0,0,0">
-                    <Run Text="Powered by:&#10;MalwareBazaar &amp;&#10;URLhaus ("/>
+                        VerticalAlignment="Bottom">
+
+                <TextBlock FontSize="14"
+                           Foreground="Black">
+
+                    <Run Text="Powered by:&#10;MalwareBazaar &amp;&#10;URLhaus (" />
+
                     <InlineUIContainer BaselineAlignment="Baseline">
                         <HyperlinkButton Content="abuse.ch"
                                          NavigateUri="https://abuse.ch/"
                                          Padding="0"
                                          FontSize="14">
                             <HyperlinkButton.RenderTransform>
-                                <TranslateTransform Y="3"/>
+                                <TranslateTransform Y="3" />
                             </HyperlinkButton.RenderTransform>
                         </HyperlinkButton>
                     </InlineUIContainer>
-                    <Run Text=")"/>
+
+                    <Run Text=")" />
+
                 </TextBlock>
+
             </StackPanel>
 
-            <StackPanel Grid.Row="3"
+            <StackPanel Grid.Column="1"
                         Orientation="Vertical"
                         HorizontalAlignment="Right"
-                        VerticalAlignment="Bottom"
-                        Margin="0,0,20,20">
+                        VerticalAlignment="Bottom">
+
                 <HyperlinkButton NavigateUri="https://github.com/PsHyCo71"
-                                 Content="My GitHub Profile"/>
+                                 Content="My GitHub Profile" />
+
                 <HyperlinkButton NavigateUri="https://github.com/PsHyCo71/ThreatFinder"
-                                 Content="Repository Page"/>
+                                 Content="Repository Page" />
+
             </StackPanel>
+
         </Grid>
+
     </Panel>
 
 </Window>

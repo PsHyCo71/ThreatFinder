@@ -29,7 +29,7 @@ public partial class MainViewModel : ViewModelBase
         SelectedMode = mode;
     }
     [RelayCommand]
-    private async Task ScanAsync()
+    public async Task ScanAsync()
     {
         if (SelectedMode == ScanMode.File)
         {
