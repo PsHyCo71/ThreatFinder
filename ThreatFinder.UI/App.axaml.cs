@@ -1,10 +1,13 @@
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using ThreatFinder.Core;
 using ThreatFinder.Providers;
+using ThreatFinder.UI;
 using ThreatFinder.ViewModels;
 using ThreatFinder.Views;
 
@@ -29,9 +32,11 @@ public partial class App : Application
 
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
+            Func<TopLevel?> topLevel = () => desktop.MainWindow;
+            FilePickerService filePicker = new FilePickerService(topLevel);
             desktop.MainWindow = new MainWindow
             {
-                DataContext = new MainViewModel(scanManager),
+                DataContext = new ShellViewModel(scanManager, filePicker)
             };
         }
 

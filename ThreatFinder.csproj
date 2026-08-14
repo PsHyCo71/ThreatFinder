@@ -21,5 +21,7 @@
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.10" />
+    <PackageReference Include="Xaml.Behaviors.Interactions" Version="12.0.5" />
+    <PackageReference Include="Xaml.Behaviors.Interactivity" Version="12.0.5" />
   </ItemGroup>
 </Project>

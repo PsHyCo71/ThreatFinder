@@ -7,13 +7,9 @@
         d:DesignWidth="800"
         d:DesignHeight="450"
         x:Class="ThreatFinder.Views.MainWindow"
-        x:DataType="vm:MainViewModel"
+        x:DataType="vm:ShellViewModel"
         Icon="../Assets/ThreatFinder_ico.ico"
         Title="ThreatFinder">
-
-    <Design.DataContext>
-        <vm:MainViewModel />
-    </Design.DataContext>
 
     <Panel>
         <Rectangle Fill="LightBlue" />
@@ -59,46 +55,7 @@
             </Ellipse.Fill>
         </Ellipse>
 
-        <!-- Control group: centered on the WHOLE window (via the Panel),
-        not sharing a Grid with the footer. This is what makes it
-        align with the ellipse, which is also centered on the Panel. -->
-        <StackPanel HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
-
-            <StackPanel Orientation="Horizontal"
-                        HorizontalAlignment="Center">
-
-                <Button Margin="0,0,20,0"
-                        Padding="20,10"
-                        FontSize="16"
-                        CornerRadius="25">
-                    URL
-                </Button>
-
-                <Button Margin="20,0,0,0"
-                        Padding="20,10"
-                        FontSize="16"
-                        CornerRadius="25">
-                    FILE
-                </Button>
-
-            </StackPanel>
-
-            <TextBox HorizontalAlignment="Center"
-                     Margin="0,30,0,0"
-                     Width="400" />
-
-            <Button Padding="20,10"
-                    FontSize="16"
-                    HorizontalAlignment="Center"
-                    Margin="0,30,0,0"
-                    CornerRadius="25"
-                    Background="Red"
-                    Command="{Binding ScanAsync}">
-                SCAN
-            </Button>
-
-        </StackPanel>
+        <ContentControl Content="{Binding CurrentViewModel}" />
 
         <!-- Footer: anchored independently to the bottom of the Panel,
         so its height doesn't skew the control group's centering. -->
