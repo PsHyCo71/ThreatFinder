@@ -30,6 +30,10 @@ public class ScanManager
             {
                 throw;
             }
+            catch (AuthenticationException)
+            {
+                throw;
+            }
             catch (Exception ex)
             {
                 return new ErrorResult(provider.Name) { Message = ex.Message };

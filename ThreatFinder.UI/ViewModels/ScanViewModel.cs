@@ -20,6 +20,12 @@ public partial class ScanViewModel : ViewModelBase
         _navigationService = navigationService;
     }
 
+    [RelayCommand]
+    public void GoToSettings()
+    {
+        _navigationService.NavigateToSettings();
+    }
+
     [ObservableProperty]
     public partial ScanMode SelectedMode { get; set; }
     [ObservableProperty]
@@ -38,16 +44,27 @@ public partial class ScanViewModel : ViewModelBase
     [RelayCommand]
     public async Task ScanAsync()
     {
-        if (SelectedMode == ScanMode.File)
+        try
         {
-            string hash = await FileHasher.ComputeSha256Async(FilePath);
-            ScanResult result = await _scanManager.ScanHashAsync(hash);
-            Result = result;
+            if (SelectedMode == ScanMode.File)
+            {
+                string hash = await FileHasher.ComputeSha256Async(FilePath);
+                ScanResult result = await _scanManager.ScanHashAsync(hash);
+                Result = result;
+            }
+            else
+            {
+                ScanResult result = await _scanManager.ScanUrlAsync(UrlInput);
+                Result = result;
+            }
         }
-        else
+        catch (ApiKeyMissingException ex)
         {
-            ScanResult result = await _scanManager.ScanUrlAsync(UrlInput);
-            Result = result;
+            _navigationService.NavigateToSettings(ex.Message);
+        }
+        catch (AuthenticationException ex)
+        {
+            _navigationService.NavigateToSettings(ex.Message);
         }
     }
     [RelayCommand]
@@ -57,7 +74,7 @@ public partial class ScanViewModel : ViewModelBase
 
         if (path is null)
             return;
-        
+
         FilePath = path;
         FileInfo fileInfo = new FileInfo(path);
         string name = Path.GetFileName(path);
@@ -66,5 +83,5 @@ public partial class ScanViewModel : ViewModelBase
         FileDisplayInfo = $"{name} - {size}";
     }
 
-    
+
 }

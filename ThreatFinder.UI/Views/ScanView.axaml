@@ -20,79 +20,95 @@
         </Style>
     </UserControl.Styles>
 
-    <StackPanel HorizontalAlignment="Center"
-                VerticalAlignment="Center">
+    <Grid>
 
-        <StackPanel Orientation="Horizontal"
-                    HorizontalAlignment="Center">
+        <Button HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Margin="20,20,0,0"
+                Padding="8"
+                Background="Transparent"
+                BorderThickness="0"
+                Command="{Binding GoToSettingsCommand}">
+            <Image Source="../Assets/settings-icon.png"
+                   Width="40"
+                   Height="40" />
+        </Button>
 
-            <Button Margin="0,0,20,0"
-                    Padding="20,10"
-                    FontSize="16"
+        <StackPanel HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center">
+
+                <Button Margin="0,0,20,0"
+                        Padding="20,10"
+                        FontSize="16"
+                        CornerRadius="25"
+                        Command="{Binding SelectModeCommand}"
+                        CommandParameter="{x:Static vm:ScanViewModel+ScanMode.Url}">
+                    URL
+                </Button>
+
+                <Button Margin="20,0,0,0"
+                        Padding="20,10"
+                        FontSize="16"
+                        CornerRadius="25"
+                        Command="{Binding SelectModeCommand}"
+                        CommandParameter="{x:Static vm:ScanViewModel+ScanMode.File}">
+                    FILE
+                </Button>
+
+            </StackPanel>
+
+            <TextBox HorizontalAlignment="Center"
+                     TextAlignment="Center"
+                     Margin="0,30,0,0"
+                     Width="400"
+                     CornerRadius="25"
+                     Foreground="Black"
+                     CaretBrush="Black"
+                     FontSize="18"
+                     Background="LightBlue"
+                     BorderBrush="Blue"
+                     BorderThickness="2"
+                     Text="{Binding UrlInput}"
+                     IsVisible="{Binding SelectedMode, Converter={StaticResource EnumEqualsConverter}, ConverterParameter={x:Static vm:ScanViewModel+ScanMode.Url}}" />
+
+            <Border HorizontalAlignment="Center"
+                    Margin="0,30,0,0"
+                    Width="400"
+                    Height="50"
                     CornerRadius="25"
-                    Command="{Binding SelectModeCommand}"
-                    CommandParameter="{x:Static vm:ScanViewModel+ScanMode.Url}">
-                URL
-            </Button>
+                    Background="LightBlue"
+                    BorderBrush="Blue"
+                    BorderThickness="2"
+                    IsVisible="{Binding SelectedMode, Converter={StaticResource EnumEqualsConverter}, ConverterParameter={x:Static vm:ScanViewModel+ScanMode.File}}">
 
-            <Button Margin="20,0,0,0"
-                    Padding="20,10"
+                <TextBlock Text="{Binding FileDisplayInfo}"
+                           Foreground="Black"
+                           FontSize="18"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center" />
+
+                <i:Interaction.Behaviors>
+                    <ia:EventTriggerBehavior EventName="PointerPressed">
+                        <ia:InvokeCommandAction Command="{Binding PickFileCommand}" />
+                    </ia:EventTriggerBehavior>
+                </i:Interaction.Behaviors>
+            </Border>
+
+            <Button Padding="20,10"
                     FontSize="16"
+                    HorizontalAlignment="Center"
+                    Margin="0,30,0,0"
                     CornerRadius="25"
-                    Command="{Binding SelectModeCommand}"
-                    CommandParameter="{x:Static vm:ScanViewModel+ScanMode.File}">
-                FILE
+                    Background="Red"
+                    Command="{Binding ScanCommand}">
+                SCAN
             </Button>
 
         </StackPanel>
 
-        <TextBox HorizontalAlignment="Center"
-                 TextAlignment="Center"
-                 Margin="0,30,0,0"
-                 Width="400"
-                 CornerRadius="25"
-                 Foreground="Black"
-                 CaretBrush="Black"
-                 FontSize="18"
-                 Background="LightBlue"
-                 BorderBrush="Blue"
-                 BorderThickness="2"
-                 Text="{Binding UrlInput}"
-                 IsVisible="{Binding SelectedMode, Converter={StaticResource EnumEqualsConverter}, ConverterParameter={x:Static vm:ScanViewModel+ScanMode.Url}}" />
-
-        <Border HorizontalAlignment="Center"
-                Margin="0,30,0,0"
-                Width="400"
-                Height="50"
-                CornerRadius="25"
-                Background="LightBlue"
-                BorderBrush="Blue"
-                BorderThickness="2"
-                IsVisible="{Binding SelectedMode, Converter={StaticResource EnumEqualsConverter}, ConverterParameter={x:Static vm:ScanViewModel+ScanMode.File}}">
-
-            <TextBlock Text="{Binding FileDisplayInfo}"
-                       Foreground="Black"
-                       FontSize="18"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center" />
-
-            <i:Interaction.Behaviors>
-                <ia:EventTriggerBehavior EventName="PointerPressed">
-                    <ia:InvokeCommandAction Command="{Binding PickFileCommand}" />
-                </ia:EventTriggerBehavior>
-            </i:Interaction.Behaviors>
-        </Border>
-
-        <Button Padding="20,10"
-                FontSize="16"
-                HorizontalAlignment="Center"
-                Margin="0,30,0,0"
-                CornerRadius="25"
-                Background="Red"
-                Command="{Binding ScanCommand}">
-            SCAN
-        </Button>
-
-    </StackPanel>
+    </Grid>
 
 </UserControl>

@@ -7,14 +7,27 @@ public partial class ShellViewModel : ViewModelBase, INavigationService
 {
     [ObservableProperty]
     public partial ViewModelBase CurrentViewModel { get; set; }
-    public ShellViewModel(ScanManager scanManager, IFilePickerService filePickerService)
+
+    private ScanViewModel _scanViewModel;
+    private IApiKeyProvider _apiKeyProvider;
+    
+    public ShellViewModel(ScanViewModel scanViewModel, IApiKeyProvider apiKeyProvider)
     {
-        ScanViewModel scanViewModel = new ScanViewModel(scanManager, filePickerService, this);
-        CurrentViewModel = scanViewModel;
+        _scanViewModel = scanViewModel;
+        _apiKeyProvider = apiKeyProvider;
+        CurrentViewModel = _scanViewModel!;
     }
 
-    public void NavigateToSettings()
+    public async void NavigateToSettings(string? errorMessage = null)
     {
-        CurrentViewModel = new SettingsViewModel();
+        var settingsViewModel = new SettingsViewModel(_apiKeyProvider);
+        await settingsViewModel.InitializeAsync();
+        settingsViewModel.ErrorMessage = errorMessage ?? string.Empty;
+        CurrentViewModel = settingsViewModel;
+    }
+
+    public void NavigateToScan()
+    {
+        CurrentViewModel = _scanViewModel; 
     }
 }

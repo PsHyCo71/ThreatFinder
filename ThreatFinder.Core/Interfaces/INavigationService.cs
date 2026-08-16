@@ -1,5 +1,6 @@
 namespace ThreatFinder.Core;
 public interface INavigationService
 {
-    void NavigateToSettings();
+    void NavigateToSettings(string? errorMessage = null);
+    void NavigateToScan();
 }

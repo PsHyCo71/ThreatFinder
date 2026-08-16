@@ -68,6 +68,10 @@
                         HorizontalAlignment="Left"
                         VerticalAlignment="Bottom">
 
+                <Image Source="../Assets/abuse.ch-icon.png"
+                       Margin="0,0,20,0"
+                       Height="30"/>
+
                 <TextBlock FontSize="14"
                            Foreground="Black">
 
@@ -94,6 +98,10 @@
                         Orientation="Vertical"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Bottom">
+
+                <Image Source="../Assets/github-icon.png"
+                       Height="30"
+                       Width="30"/>
 
                 <HyperlinkButton NavigateUri="https://github.com/PsHyCo71"
                                  Content="My GitHub Profile" />

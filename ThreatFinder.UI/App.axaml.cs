@@ -36,7 +36,7 @@ public partial class App : Application
             FilePickerService filePicker = new FilePickerService(topLevel);
             desktop.MainWindow = new MainWindow
             {
-                DataContext = new ShellViewModel(scanManager, filePicker)
+                DataContext = new ShellViewModel(scanManager, filePicker, keyProvider)
             };
         }
 

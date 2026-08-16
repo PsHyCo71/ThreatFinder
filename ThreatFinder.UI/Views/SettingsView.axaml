@@ -1,7 +1,142 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             x:Class="ThreatFinder.Views.SettingsView">
+             xmlns:converters="using:ThreatFinder.UI"
+             xmlns:vm="using:ThreatFinder.ViewModels"
+             x:Class="ThreatFinder.Views.SettingsView"
+             x:DataType="vm:SettingsViewModel">
 
-    <!--TODO-->
+    <UserControl.Resources>
+        <converters:BoolToCaretBrushConverter x:Key="BoolToCaretBrushConverter" />
+    </UserControl.Resources>
+
+    <UserControl.Styles>
+        <Style Selector="TextBox:focus /template/ Border#PART_BorderElement">
+            <Setter Property="Background" Value="LightBlue" />
+        </Style>
+        <Style Selector="TextBox:pointerover /template/ Border#PART_BorderElement">
+            <Setter Property="Background" Value="LightBlue" />
+        </Style>
+    </UserControl.Styles>
+
+    <StackPanel HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Width="400">
+
+        <TextBlock Text="AUTH-KEYS"
+                   FontSize="40"
+                   FontWeight="Bold"
+                   Foreground="Black"
+                   HorizontalAlignment="Center"
+                   Margin="0,50,0,30" />
+
+        <!-- MalwareBazaar -->
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    Margin="0,0,0,20">
+
+            <TextBlock Text="MalwareBazaar:"
+                       Foreground="Black"
+                       FontSize="20"
+                       VerticalAlignment="Center"
+                       Margin="0,0,10,0" />
+
+            <TextBox x:Name="MalwareBazaarTextBox"
+                     Text="{Binding MalwareBazaarKey}"
+                     IsReadOnly="{Binding !IsEditingMalwareBazaarKey}"
+                     CaretBrush="{Binding IsEditingMalwareBazaarKey, Converter={StaticResource BoolToCaretBrushConverter}}"
+                     Width="200"
+                     CornerRadius="25"
+                     Foreground="Black"
+                     FontSize="18"
+                     Background="LightBlue"
+                     BorderBrush="Blue"
+                     BorderThickness="2"
+                     VerticalAlignment="Center">
+
+                <TextBox.KeyBindings>
+                    <KeyBinding Gesture="Enter"
+                                Command="{Binding ConfirmKeyCommand}"
+                                CommandParameter="MalwareBazaar" />
+                </TextBox.KeyBindings>
+
+            </TextBox>
+
+            <Grid>
+                <Button Content="+"
+                        Command="{Binding ConfirmKeyCommand}"
+                        CommandParameter="MalwareBazaar"
+                        IsVisible="{Binding !IsEditingMalwareBazaarKey}"
+                        Width="36"
+                        CornerRadius="25"
+                        HorizontalContentAlignment="Center" />
+
+                <Button Content="✓"
+                        Command="{Binding ConfirmKeyCommand}"
+                        CommandParameter="MalwareBazaar"
+                        IsVisible="{Binding IsEditingMalwareBazaarKey}"
+                        Width="36"
+                        CornerRadius="25"
+                        HorizontalContentAlignment="Center" />
+            </Grid>
+
+        </StackPanel>
+
+        <!-- URLhaus -->
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Center">
+
+            <TextBlock Text="URLhaus:"
+                       Foreground="Black"
+                       FontSize="20"
+                       VerticalAlignment="Center"
+                       Margin="0,0,10,0" />
+
+            <TextBox x:Name="URLhausTextBox"
+                     Text="{Binding UrlhausKey}"
+                     IsReadOnly="{Binding !IsEditingUrlhausKey}"
+                     CaretBrush="{Binding IsEditingMalwareBazaarKey, Converter={StaticResource BoolToCaretBrushConverter}}"
+                     Width="200"
+                     CornerRadius="25"
+                     Foreground="Black"
+                     FontSize="18"
+                     Background="LightBlue"
+                     BorderBrush="Blue"
+                     BorderThickness="2"
+                     VerticalAlignment="Center">
+
+                <TextBox.KeyBindings>
+                    <KeyBinding Gesture="Enter"
+                                Command="{Binding ConfirmKeyCommand}"
+                                CommandParameter="URLhaus" />
+                </TextBox.KeyBindings>
+
+            </TextBox>
+
+            <Grid>
+                <Button Content="+"
+                        Command="{Binding ConfirmKeyCommand}"
+                        CommandParameter="URLhaus"
+                        IsVisible="{Binding !IsEditingUrlhausKey}"
+                        Width="36"
+                        CornerRadius="25"
+                        HorizontalContentAlignment="Center" />
+
+                <Button Content="✓"
+                        Command="{Binding ConfirmKeyCommand}"
+                        CommandParameter="URLhaus"
+                        IsVisible="{Binding IsEditingUrlhausKey}"
+                        Width="36"
+                        CornerRadius="25"
+                        HorizontalContentAlignment="Center" />
+            </Grid>
+
+        </StackPanel>
+        
+        <TextBlock Margin="0,50"
+                       Foreground="Red"
+                       FontSize="20"
+                       Text="{Binding ErrorMessage}" />
+                    
+    </StackPanel>
 
 </UserControl>
