@@ -33,7 +33,7 @@ public class URLhausProvider : IThreatIntelProvider
         {
             Content = content
         };
-        request.Headers.Add("Auth-key", authKey);
+        request.Headers.Add("Auth-Key", authKey);
         var response = await _httpClient.SendAsync(request);
         HttpResponseValidator.EnsureSuccess(response, Name);
         var json = await response.Content.ReadAsStringAsync();

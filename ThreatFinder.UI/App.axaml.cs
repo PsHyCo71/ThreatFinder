@@ -29,7 +29,6 @@ public partial class App : Application
         List<IThreatIntelProvider> providers = [mbProvider, urlhausProvider];
         ScanManager scanManager = new ScanManager(providers, keyProvider);
 
-
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             Func<TopLevel?> topLevel = () => desktop.MainWindow;

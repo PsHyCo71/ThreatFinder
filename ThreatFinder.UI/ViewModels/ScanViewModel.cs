@@ -1,6 +1,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.IO;
+using System;
 using System.Threading.Tasks;
 using ThreatFinder.Core;
 
@@ -36,6 +37,11 @@ public partial class ScanViewModel : ViewModelBase
     public partial ScanResult? Result { get; set; } = null;
     [ObservableProperty]
     public partial string FileDisplayInfo { get; set; } = "No file selected";
+    [ObservableProperty]
+    public partial bool FileError { get; set; } = false;
+    [ObservableProperty]
+    public partial bool IsScanning { get; set; } = false;
+
     [RelayCommand]
     private void SelectMode(ScanMode mode)
     {
@@ -44,18 +50,32 @@ public partial class ScanViewModel : ViewModelBase
     [RelayCommand]
     public async Task ScanAsync()
     {
+        if (IsScanning)
+            return;
+
+        if (SelectedMode == ScanMode.File && string.IsNullOrWhiteSpace(FilePath))
+        {
+            FileError = true;
+            FileDisplayInfo = "Please select a file before scanning.";
+            return;
+        }
+
+        if (SelectedMode == ScanMode.Url && string.IsNullOrWhiteSpace(UrlInput))
+        {
+            return;
+        }
+
+        IsScanning = true;
         try
         {
             if (SelectedMode == ScanMode.File)
             {
                 string hash = await FileHasher.ComputeSha256Async(FilePath);
-                ScanResult result = await _scanManager.ScanHashAsync(hash);
-                Result = result;
+                Result = await _scanManager.ScanHashAsync(hash);
             }
             else
             {
-                ScanResult result = await _scanManager.ScanUrlAsync(UrlInput);
-                Result = result;
+                Result = await _scanManager.ScanUrlAsync(UrlInput);
             }
         }
         catch (ApiKeyMissingException ex)
@@ -66,7 +86,12 @@ public partial class ScanViewModel : ViewModelBase
         {
             _navigationService.NavigateToSettings(ex.Message);
         }
+        finally
+        {
+            IsScanning = false;
+        }
     }
+
     [RelayCommand]
     public async Task PickFileAsync()
     {
@@ -75,12 +100,21 @@ public partial class ScanViewModel : ViewModelBase
         if (path is null)
             return;
 
-        FilePath = path;
-        FileInfo fileInfo = new FileInfo(path);
-        string name = Path.GetFileName(path);
-        long bytes = fileInfo.Length;
-        string size = FileSizeFormatter.Format(bytes);
-        FileDisplayInfo = $"{name} - {size}";
+        try
+        {
+            FilePath = path;
+            FileInfo fileInfo = new FileInfo(path);
+            string name = Path.GetFileName(path);
+            long bytes = fileInfo.Length;
+            string size = FileSizeFormatter.Format(bytes);
+            FileError = false;
+            FileDisplayInfo = $"{name} - {size}";
+        }
+        catch (FileNotFoundException ex)
+        {
+            FileError = true;
+            FileDisplayInfo = ex.Message;
+        }
     }
 
 

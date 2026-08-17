@@ -24,10 +24,12 @@ public partial class SettingsViewModel : ViewModelBase
     public partial string ErrorMessage { get; set; } = string.Empty;
 
     private readonly IApiKeyProvider _apiKeyProvider;
+    private INavigationService _navigationService;
 
-    public SettingsViewModel(IApiKeyProvider apiKeyProvider)
+    public SettingsViewModel(IApiKeyProvider apiKeyProvider, INavigationService navigationService)
     {
         _apiKeyProvider = apiKeyProvider;
+        _navigationService = navigationService;
     }
 
     public async Task InitializeAsync()
@@ -51,7 +53,30 @@ public partial class SettingsViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    public async Task ConfirmKeyAsync(string providerName)
+    public void GoToScan()
+    {
+        _navigationService.NavigateToScan();
+    }
+
+    [RelayCommand]
+    public void OpenEdit(string providerName)
+    {
+        switch (providerName)
+        {
+            case "MalwareBazaar":
+                IsEditingMalwareBazaarKey = true;
+                break;
+            case "URLhaus":
+                IsEditingUrlhausKey = true;
+                break;
+            default:
+                throw new ArgumentException($"Unknown provider: {providerName}");
+
+        }
+    }
+
+    [RelayCommand]
+    public async Task SaveKeyAsync(string providerName)
     {
         switch (providerName)
         {
@@ -61,10 +86,6 @@ public partial class SettingsViewModel : ViewModelBase
                     await _apiKeyProvider.SaveApiKeyAsync(providerName, MalwareBazaarKey);
                     IsEditingMalwareBazaarKey = false;
                 }
-                else
-                {
-                    IsEditingMalwareBazaarKey = true;
-                }
                 break;
 
             case "URLhaus":
@@ -72,10 +93,6 @@ public partial class SettingsViewModel : ViewModelBase
                 {
                     await _apiKeyProvider.SaveApiKeyAsync(providerName, UrlhausKey);
                     IsEditingUrlhausKey = false;
-                }
-                else
-                {
-                    IsEditingUrlhausKey = true;
                 }
                 break;
 

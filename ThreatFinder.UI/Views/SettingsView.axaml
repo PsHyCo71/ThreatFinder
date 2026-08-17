@@ -18,125 +18,144 @@
         </Style>
     </UserControl.Styles>
 
-    <StackPanel HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Width="400">
+    <Grid>
 
-        <TextBlock Text="AUTH-KEYS"
-                   FontSize="40"
-                   FontWeight="Bold"
-                   Foreground="Black"
-                   HorizontalAlignment="Center"
-                   Margin="0,50,0,30" />
+        <Button HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Margin="20,20,0,0"
+                Padding="8"
+                Background="Transparent"
+                BorderThickness="0"
+                FontSize="28"
+                Command="{Binding GoToScanCommand}">
+            <Image Source="../Assets/settings-icon.png"
+                   Width="40"
+                   Height="40" />
+        </Button>
 
-        <!-- MalwareBazaar -->
-        <StackPanel Orientation="Horizontal"
-                    HorizontalAlignment="Center"
-                    Margin="0,0,0,20">
+        <StackPanel HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Width="400">
 
-            <TextBlock Text="MalwareBazaar:"
+            <TextBlock Text="AUTH-KEYS"
+                       FontSize="40"
+                       FontWeight="Bold"
                        Foreground="Black"
-                       FontSize="20"
-                       VerticalAlignment="Center"
-                       Margin="0,0,10,0" />
+                       HorizontalAlignment="Center"
+                       Margin="0,50,0,30" />
 
-            <TextBox x:Name="MalwareBazaarTextBox"
-                     Text="{Binding MalwareBazaarKey}"
-                     IsReadOnly="{Binding !IsEditingMalwareBazaarKey}"
-                     CaretBrush="{Binding IsEditingMalwareBazaarKey, Converter={StaticResource BoolToCaretBrushConverter}}"
-                     Width="200"
-                     CornerRadius="25"
-                     Foreground="Black"
-                     FontSize="18"
-                     Background="LightBlue"
-                     BorderBrush="Blue"
-                     BorderThickness="2"
-                     VerticalAlignment="Center">
+            <!-- MalwareBazaar -->
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        Margin="0,0,0,20">
 
-                <TextBox.KeyBindings>
-                    <KeyBinding Gesture="Enter"
-                                Command="{Binding ConfirmKeyCommand}"
-                                CommandParameter="MalwareBazaar" />
-                </TextBox.KeyBindings>
+                <TextBlock Text="MalwareBazaar:"
+                           Foreground="Black"
+                           FontSize="20"
+                           VerticalAlignment="Center"
+                           Margin="0,0,10,0" />
 
-            </TextBox>
+                <TextBox x:Name="MalwareBazaarTextBox"
+                         Text="{Binding MalwareBazaarKey}"
+                         IsReadOnly="{Binding !IsEditingMalwareBazaarKey}"
+                         CaretBrush="{Binding IsEditingMalwareBazaarKey, Converter={StaticResource BoolToCaretBrushConverter}}"
+                         Width="200"
+                         CornerRadius="25"
+                         Foreground="Black"
+                         FontSize="18"
+                         Background="LightBlue"
+                         BorderBrush="Blue"
+                         BorderThickness="2"
+                         VerticalAlignment="Center">
 
-            <Grid>
-                <Button Content="+"
-                        Command="{Binding ConfirmKeyCommand}"
-                        CommandParameter="MalwareBazaar"
-                        IsVisible="{Binding !IsEditingMalwareBazaarKey}"
-                        Width="36"
-                        CornerRadius="25"
-                        HorizontalContentAlignment="Center" />
+                    <TextBox.KeyBindings>
+                        <KeyBinding Gesture="Enter"
+                                    Command="{Binding SaveKeyCommand}"
+                                    CommandParameter="MalwareBazaar" />
+                    </TextBox.KeyBindings>
 
-                <Button Content="✓"
-                        Command="{Binding ConfirmKeyCommand}"
-                        CommandParameter="MalwareBazaar"
-                        IsVisible="{Binding IsEditingMalwareBazaarKey}"
-                        Width="36"
-                        CornerRadius="25"
-                        HorizontalContentAlignment="Center" />
-            </Grid>
+                </TextBox>
 
-        </StackPanel>
+                <Grid>
+                    <Button Content="+"
+                            Command="{Binding OpenEditCommand}"
+                            CommandParameter="MalwareBazaar"
+                            IsVisible="{Binding !IsEditingMalwareBazaarKey}"
+                            Width="36"
+                            CornerRadius="25"
+                            HorizontalContentAlignment="Center" />
 
-        <!-- URLhaus -->
-        <StackPanel Orientation="Horizontal"
-                    HorizontalAlignment="Center">
+                    <Button Content="✓"
+                            Command="{Binding SaveKeyCommand}"
+                            CommandParameter="MalwareBazaar"
+                            IsVisible="{Binding IsEditingMalwareBazaarKey}"
+                            Width="36"
+                            CornerRadius="25"
+                            HorizontalContentAlignment="Center" />
+                </Grid>
 
-            <TextBlock Text="URLhaus:"
-                       Foreground="Black"
-                       FontSize="20"
-                       VerticalAlignment="Center"
-                       Margin="0,0,10,0" />
+            </StackPanel>
 
-            <TextBox x:Name="URLhausTextBox"
-                     Text="{Binding UrlhausKey}"
-                     IsReadOnly="{Binding !IsEditingUrlhausKey}"
-                     CaretBrush="{Binding IsEditingMalwareBazaarKey, Converter={StaticResource BoolToCaretBrushConverter}}"
-                     Width="200"
-                     CornerRadius="25"
-                     Foreground="Black"
-                     FontSize="18"
-                     Background="LightBlue"
-                     BorderBrush="Blue"
-                     BorderThickness="2"
-                     VerticalAlignment="Center">
+            <!-- URLhaus -->
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center">
 
-                <TextBox.KeyBindings>
-                    <KeyBinding Gesture="Enter"
-                                Command="{Binding ConfirmKeyCommand}"
-                                CommandParameter="URLhaus" />
-                </TextBox.KeyBindings>
+                <TextBlock Text="URLhaus:"
+                           Foreground="Black"
+                           FontSize="20"
+                           VerticalAlignment="Center"
+                           Margin="0,0,10,0" />
 
-            </TextBox>
+                <TextBox x:Name="URLhausTextBox"
+                         Text="{Binding UrlhausKey}"
+                         IsReadOnly="{Binding !IsEditingUrlhausKey}"
+                         CaretBrush="{Binding IsEditingUrlhausKey, Converter={StaticResource BoolToCaretBrushConverter}}"
+                         Width="200"
+                         CornerRadius="25"
+                         Foreground="Black"
+                         FontSize="18"
+                         Background="LightBlue"
+                         BorderBrush="Blue"
+                         BorderThickness="2"
+                         VerticalAlignment="Center">
 
-            <Grid>
-                <Button Content="+"
-                        Command="{Binding ConfirmKeyCommand}"
-                        CommandParameter="URLhaus"
-                        IsVisible="{Binding !IsEditingUrlhausKey}"
-                        Width="36"
-                        CornerRadius="25"
-                        HorizontalContentAlignment="Center" />
+                    <TextBox.KeyBindings>
+                        <KeyBinding Gesture="Enter"
+                                    Command="{Binding SaveKeyCommand}"
+                                    CommandParameter="URLhaus" />
+                    </TextBox.KeyBindings>
 
-                <Button Content="✓"
-                        Command="{Binding ConfirmKeyCommand}"
-                        CommandParameter="URLhaus"
-                        IsVisible="{Binding IsEditingUrlhausKey}"
-                        Width="36"
-                        CornerRadius="25"
-                        HorizontalContentAlignment="Center" />
-            </Grid>
+                </TextBox>
 
-        </StackPanel>
-        
-        <TextBlock Margin="0,50"
+                <Grid>
+                    <Button Content="+"
+                            Command="{Binding OpenEditCommand}"
+                            CommandParameter="URLhaus"
+                            IsVisible="{Binding !IsEditingUrlhausKey}"
+                            Width="36"
+                            CornerRadius="25"
+                            HorizontalContentAlignment="Center" />
+
+                    <Button Content="✓"
+                            Command="{Binding SaveKeyCommand}"
+                            CommandParameter="URLhaus"
+                            IsVisible="{Binding IsEditingUrlhausKey}"
+                            Width="36"
+                            CornerRadius="25"
+                            HorizontalContentAlignment="Center" />
+                </Grid>
+
+            </StackPanel>
+
+            <TextBlock Margin="0,50"
                        Foreground="Red"
                        FontSize="20"
+                       TextWrapping="Wrap"
+                       TextAlignment="Center"
                        Text="{Binding ErrorMessage}" />
-                    
-    </StackPanel>
+
+        </StackPanel>
+
+    </Grid>
 
 </UserControl>

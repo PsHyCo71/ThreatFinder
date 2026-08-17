@@ -9,6 +9,7 @@
 
     <UserControl.Resources>
         <converters:EnumEqualsConverter x:Key="EnumEqualsConverter" />
+        <converters:BoolToErrorColorConverter x:Key="BoolToErrorColorConverter" />
     </UserControl.Resources>
 
     <UserControl.Styles>
@@ -84,11 +85,19 @@
                     BorderThickness="2"
                     IsVisible="{Binding SelectedMode, Converter={StaticResource EnumEqualsConverter}, ConverterParameter={x:Static vm:ScanViewModel+ScanMode.File}}">
 
-                <TextBlock Text="{Binding FileDisplayInfo}"
-                           Foreground="Black"
-                           FontSize="18"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Center" />
+                <ScrollViewer HorizontalScrollBarVisibility="Hidden"
+                              VerticalScrollBarVisibility="Disabled"
+                              VerticalAlignment="Center">
+
+                    <TextBlock Text="{Binding FileDisplayInfo}"
+                               Foreground="{Binding FileError, Converter={StaticResource BoolToErrorColorConverter}}"
+                               FontSize="18"
+                               TextWrapping="NoWrap"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Margin="15,0" />
+
+                </ScrollViewer>
 
                 <i:Interaction.Behaviors>
                     <ia:EventTriggerBehavior EventName="PointerPressed">
@@ -106,6 +115,13 @@
                     Command="{Binding ScanCommand}">
                 SCAN
             </Button>
+
+            <ProgressBar IsIndeterminate="True"
+                         IsVisible="{Binding IsScanning}"
+                         Width="200"
+                         Height="4"
+                         HorizontalAlignment="Center"
+                         Margin="0,15,0,0" />
 
         </StackPanel>
 

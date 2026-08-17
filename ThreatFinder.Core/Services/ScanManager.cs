@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -34,6 +35,10 @@ public class ScanManager
             {
                 throw;
             }
+            catch (FileNotFoundException)
+            {
+                throw;
+            }
             catch (Exception ex)
             {
                 return new ErrorResult(provider.Name) { Message = ex.Message };
@@ -56,6 +61,10 @@ public class ScanManager
                 return await provider.CheckUrlAsync(URLhauskey, url);
             }
             catch (ApiKeyMissingException)
+            {
+                throw;
+            }
+            catch (AuthenticationException)
             {
                 throw;
             }

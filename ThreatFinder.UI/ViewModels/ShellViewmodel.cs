@@ -8,19 +8,19 @@ public partial class ShellViewModel : ViewModelBase, INavigationService
     [ObservableProperty]
     public partial ViewModelBase CurrentViewModel { get; set; }
 
-    private ScanViewModel _scanViewModel;
-    private IApiKeyProvider _apiKeyProvider;
-    
-    public ShellViewModel(ScanViewModel scanViewModel, IApiKeyProvider apiKeyProvider)
+    private readonly ScanViewModel _scanViewModel;
+    private readonly IApiKeyProvider _apiKeyProvider;
+
+    public ShellViewModel(ScanManager scanManager, IFilePickerService filePickerService, IApiKeyProvider apiKeyProvider)
     {
-        _scanViewModel = scanViewModel;
         _apiKeyProvider = apiKeyProvider;
-        CurrentViewModel = _scanViewModel!;
+        _scanViewModel = new ScanViewModel(scanManager, filePickerService, this);
+        CurrentViewModel = _scanViewModel;
     }
 
     public async void NavigateToSettings(string? errorMessage = null)
     {
-        var settingsViewModel = new SettingsViewModel(_apiKeyProvider);
+        var settingsViewModel = new SettingsViewModel(_apiKeyProvider, this);
         await settingsViewModel.InitializeAsync();
         settingsViewModel.ErrorMessage = errorMessage ?? string.Empty;
         CurrentViewModel = settingsViewModel;
@@ -28,6 +28,6 @@ public partial class ShellViewModel : ViewModelBase, INavigationService
 
     public void NavigateToScan()
     {
-        CurrentViewModel = _scanViewModel; 
+        CurrentViewModel = _scanViewModel;
     }
 }
