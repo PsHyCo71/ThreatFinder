@@ -11,11 +11,13 @@ public partial class ScanViewModel : ViewModelBase
 {
     public enum ScanMode { Url, File }
 
+    private ResultsViewModel _resultViewModel;
     private ScanManager _scanManager;
     private IFilePickerService _filePickerService;
     private INavigationService _navigationService;
-    public ScanViewModel(ScanManager scanManager, IFilePickerService filePickerService, INavigationService navigationService)
+    public ScanViewModel(ScanManager scanManager, IFilePickerService filePickerService, INavigationService navigationService, ResultsViewModel resultsViewModel)
     {
+        _resultViewModel = resultsViewModel;
         _scanManager = scanManager;
         _filePickerService = filePickerService;
         _navigationService = navigationService;
@@ -34,8 +36,6 @@ public partial class ScanViewModel : ViewModelBase
     [ObservableProperty]
     public partial string FilePath { get; set; } = string.Empty;
     [ObservableProperty]
-    public partial ScanResult? Result { get; set; } = null;
-    [ObservableProperty]
     public partial string FileDisplayInfo { get; set; } = "No file selected";
     [ObservableProperty]
     public partial bool FileError { get; set; } = false;
@@ -52,7 +52,7 @@ public partial class ScanViewModel : ViewModelBase
     {
         if (IsScanning)
             return;
-
+        
         if (SelectedMode == ScanMode.File && string.IsNullOrWhiteSpace(FilePath))
         {
             FileError = true;
@@ -71,11 +71,13 @@ public partial class ScanViewModel : ViewModelBase
             if (SelectedMode == ScanMode.File)
             {
                 string hash = await FileHasher.ComputeSha256Async(FilePath);
-                Result = await _scanManager.ScanHashAsync(hash);
+                _resultViewModel.Result = await _scanManager.ScanHashAsync(hash);
+                _navigationService.NavigateToResults(_resultViewModel);
             }
             else
             {
-                Result = await _scanManager.ScanUrlAsync(UrlInput);
+                _resultViewModel.Result = await _scanManager.ScanUrlAsync(UrlInput);
+                _navigationService.NavigateToResults(_resultViewModel);
             }
         }
         catch (ApiKeyMissingException ex)
@@ -111,6 +113,16 @@ public partial class ScanViewModel : ViewModelBase
             FileDisplayInfo = $"{name} - {size}";
         }
         catch (FileNotFoundException ex)
+        {
+            FileError = true;
+            FileDisplayInfo = ex.Message;
+        }
+        catch (UnauthorizedAccessException)
+        {
+            FileError = true;
+            FileDisplayInfo = "You lack the necessary permits to access this file!";
+        }
+        catch (IOException ex)
         {
             FileError = true;
             FileDisplayInfo = ex.Message;

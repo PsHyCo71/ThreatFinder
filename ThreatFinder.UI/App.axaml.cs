@@ -33,9 +33,10 @@ public partial class App : Application
         {
             Func<TopLevel?> topLevel = () => desktop.MainWindow;
             FilePickerService filePicker = new FilePickerService(topLevel);
+            ResultsViewModel resultsViewModel = new ResultsViewModel();
             desktop.MainWindow = new MainWindow
             {
-                DataContext = new ShellViewModel(scanManager, filePicker, keyProvider)
+                DataContext = new ShellViewModel(scanManager, filePicker, keyProvider, resultsViewModel)
             };
         }
 

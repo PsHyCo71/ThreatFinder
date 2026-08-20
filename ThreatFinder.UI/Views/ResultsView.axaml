@@ -1,55 +1,27 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:converters="using:ThreatFinder.UI"
              xmlns:vm="using:ThreatFinder.ViewModels"
-             x:Class="ThreatFinder.Views.SettingsView"
-             x:DataType="vm:SettingsViewModel">
-
-    <UserControl.Resources>
-        <converters:BoolToCaretBrushConverter x:Key="BoolToCaretBrushConverter" />
-    </UserControl.Resources>
-
-    <UserControl.Styles>
-        <Style Selector="TextBox:focus /template/ Border#PART_BorderElement">
-            <Setter Property="Background" Value="LightBlue" />
-        </Style>
-        <Style Selector="TextBox:pointerover /template/ Border#PART_BorderElement">
-            <Setter Property="Background" Value="LightBlue" />
-        </Style>
-    </UserControl.Styles>
+             x:Class="ThreatFinder.Views.ResultsView"
+             x:DataType="vm:ResultsViewModel">
 
     <Grid>
-
-        <Button HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                Margin="20,20,0,0"
-                Padding="8"
-                Background="Transparent"
-                BorderThickness="0"
-                FontSize="28"
-                Command="{Binding GoToScanCommand}">
-            <Image Source="../Assets/settings-icon.png"
-                   Width="40"
-                   Height="40" />
-        </Button>
 
         <StackPanel HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Width="400">
 
-            <TextBlock Text="AUTH-KEYS"
+            <TextBlock Text="SCAN RESULTS"
                        FontSize="40"
                        FontWeight="Bold"
                        Foreground="Black"
                        HorizontalAlignment="Center"
                        Margin="0,100,0,30" />
 
-            <!-- MalwareBazaar -->
-            <StackPanel Orientation="Horizontal"
+            <!-- <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Center"
                         Margin="0,0,0,20">
 
-                <TextBlock Text="MalwareBazaar:"
+                <TextBlock Text="Target:"
                            Foreground="Black"
                            FontSize="20"
                            VerticalAlignment="Center"
@@ -96,8 +68,7 @@
 
             </StackPanel>
 
-            <!-- URLhaus -->
-            <StackPanel Orientation="Horizontal"
+            <!- <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Center">
 
                 <TextBlock Text="URLhaus:"
@@ -152,10 +123,10 @@
                        FontSize="20"
                        TextWrapping="Wrap"
                        TextAlignment="Center"
-                       Text="{Binding ErrorMessage}" />
+                       Text="{Binding ErrorMessage}" /> -->
 
         </StackPanel>
 
     </Grid>
 
-</UserControl>
+</ UserControl>

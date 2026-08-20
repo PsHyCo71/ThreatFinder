@@ -62,6 +62,6 @@ public class ApiKeyProvider : IApiKeyProvider
                 throw new ArgumentException($"Unknown provider: {providerName}");
         }
 
-        await File.WriteAllTextAsync("appsettings.json", JsonSerializer.Serialize(keys));
+        await File.WriteAllTextAsync("appsettings.json", JsonSerializer.Serialize(keys, new JsonSerializerOptions { WriteIndented = true }));
     }
 }

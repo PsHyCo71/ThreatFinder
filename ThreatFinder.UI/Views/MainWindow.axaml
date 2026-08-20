@@ -12,7 +12,237 @@
         Title="ThreatFinder">
 
     <Panel>
-        <Rectangle Fill="LightBlue" />
+        <Rectangle Fill="#9BD7EB" />
+
+        <Ellipse Width="60" Height="60"
+                 HorizontalAlignment="Right" VerticalAlignment="Top"
+                 Margin="0,-30,-30,0"
+                 Fill="Transparent" Stroke="#4545FF" StrokeThickness="3" Opacity="0.4" />
+
+        <Ellipse Width="100" Height="100"
+                 HorizontalAlignment="Right" VerticalAlignment="Top"
+                 Margin="0,-50,-50,0"
+                 Fill="Transparent" Stroke="#4545FF" StrokeThickness="3" Opacity="0.4" />
+
+        <Ellipse Width="140" Height="140"
+                 HorizontalAlignment="Right" VerticalAlignment="Top"
+                 Margin="0,-70,-70,0"
+                 Fill="Transparent" Stroke="#4545FF" StrokeThickness="3" Opacity="0.4" />
+
+        <Ellipse Width="180" Height="180"
+                 HorizontalAlignment="Right" VerticalAlignment="Top"
+                 Margin="0,-90,-90,0"
+                 Fill="Transparent" Stroke="#4545FF" StrokeThickness="3" Opacity="0.4" />
+
+        <Ellipse Width="220" Height="220"
+                 HorizontalAlignment="Right" VerticalAlignment="Top"
+                 Margin="0,-110,-110,0"
+                 Fill="Transparent" Stroke="#4545FF" StrokeThickness="3" Opacity="0.4" />
+
+        <Ellipse Width="260" Height="260"
+                 HorizontalAlignment="Right" VerticalAlignment="Top"
+                 Margin="0,-130,-130,0"
+                 Fill="Transparent" Stroke="#4545FF" StrokeThickness="3" Opacity="0.4" />
+
+        <Ellipse Width="300" Height="300"
+                 HorizontalAlignment="Right" VerticalAlignment="Top"
+                 Margin="0,-150,-150,0"
+                 Fill="Transparent" Stroke="#4545FF" StrokeThickness="3" Opacity="0.4" />
+
+        <Ellipse Width="340" Height="340"
+                 HorizontalAlignment="Right" VerticalAlignment="Top"
+                 Margin="0,-170,-170,0"
+                 Fill="Transparent" Stroke="#4545FF" StrokeThickness="3" Opacity="0.4" />
+
+        <Ellipse Width="380" Height="380"
+                 HorizontalAlignment="Right" VerticalAlignment="Top"
+                 Margin="0,-190,-190,0"
+                 Fill="Transparent" Stroke="#4545FF" StrokeThickness="3" Opacity="0.4" />
+
+        <Ellipse Width="420" Height="420"
+                 HorizontalAlignment="Right" VerticalAlignment="Top"
+                 Margin="0,-210,-210,0"
+                 Fill="Transparent" Stroke="#4545FF" StrokeThickness="3" Opacity="0.4" />
+
+        <Ellipse Width="60" Height="60"
+                 HorizontalAlignment="Left" VerticalAlignment="Center"
+                 Margin="-30,0,0,0"
+                 Fill="Transparent" Stroke="#4545FF" StrokeThickness="3" Opacity="0.4" />
+
+        <Ellipse Width="100" Height="100"
+                 HorizontalAlignment="Left" VerticalAlignment="Center"
+                 Margin="-50,0,0,0"
+                 Fill="Transparent" Stroke="#4545FF" StrokeThickness="3" Opacity="0.4" />
+
+        <Ellipse Width="140" Height="140"
+                 HorizontalAlignment="Left" VerticalAlignment="Center"
+                 Margin="-70,0,0,0"
+                 Fill="Transparent" Stroke="#4545FF" StrokeThickness="3" Opacity="0.4" />
+
+        <Ellipse Width="180" Height="180"
+                 HorizontalAlignment="Left" VerticalAlignment="Center"
+                 Margin="-90,0,0,0"
+                 Fill="Transparent" Stroke="#4545FF" StrokeThickness="3" Opacity="0.4" />
+
+        <Ellipse Width="220" Height="220"
+                 HorizontalAlignment="Left" VerticalAlignment="Center"
+                 Margin="-110,0,0,0"
+                 Fill="Transparent" Stroke="#4545FF" StrokeThickness="3" Opacity="0.4" />
+
+        <Ellipse Width="260" Height="260"
+                 HorizontalAlignment="Left" VerticalAlignment="Center"
+                 Margin="-130,0,0,0"
+                 Fill="Transparent" Stroke="#4545FF" StrokeThickness="3" Opacity="0.4" />
+
+        <Ellipse Width="300" Height="300"
+                 HorizontalAlignment="Left" VerticalAlignment="Center"
+                 Margin="-150,0,0,0"
+                 Fill="Transparent" Stroke="#4545FF" StrokeThickness="3" Opacity="0.4" />
+
+        <Ellipse Width="340" Height="340"
+                 HorizontalAlignment="Left" VerticalAlignment="Center"
+                 Margin="-170,0,0,0"
+                 Fill="Transparent" Stroke="#4545FF" StrokeThickness="3" Opacity="0.4" />
+
+        <Ellipse Width="380" Height="380"
+                 HorizontalAlignment="Left" VerticalAlignment="Center"
+                 Margin="-190,0,0,0"
+                 Fill="Transparent" Stroke="#4545FF" StrokeThickness="3" Opacity="0.4" />
+
+        <Ellipse Width="420" Height="420"
+                 HorizontalAlignment="Left" VerticalAlignment="Center"
+                 Margin="-210,0,0,0"
+                 Fill="Transparent" Stroke="#4545FF" StrokeThickness="3" Opacity="0.4" />
+
+        <Ellipse Width="40" Height="40"
+                 HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                 Margin="500,0,0,-20"
+                 Fill="Transparent" Stroke="#4545FF" StrokeThickness="3" Opacity="0.4" />
+
+        <Ellipse Width="70" Height="70"
+                 HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                 Margin="500,0,0,-35"
+                 Fill="Transparent" Stroke="#4545FF" StrokeThickness="3" Opacity="0.4" />
+
+        <Ellipse Width="100" Height="100"
+                 HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                 Margin="500,0,0,-50"
+                 Fill="Transparent" Stroke="#4545FF" StrokeThickness="3" Opacity="0.4" />
+
+        <Ellipse Width="130" Height="130"
+                 HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                 Margin="500,0,0,-65"
+                 Fill="Transparent" Stroke="#4545FF" StrokeThickness="3" Opacity="0.4" />
+
+        <Ellipse Width="160" Height="160"
+                 HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                 Margin="500,0,0,-80"
+                 Fill="Transparent" Stroke="#4545FF" StrokeThickness="3" Opacity="0.4" />
+
+        <Ellipse Width="190" Height="190"
+                 HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                 Margin="500,0,0,-95"
+                 Fill="Transparent" Stroke="#4545FF" StrokeThickness="3" Opacity="0.4" />
+
+        <Ellipse Width="220" Height="220"
+                 HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                 Margin="500,0,0,-110"
+                 Fill="Transparent" Stroke="#4545FF" StrokeThickness="3" Opacity="0.4" />
+
+        <Ellipse Width="250" Height="250"
+                 HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                 Margin="500,0,0,-125"
+                 Fill="Transparent" Stroke="#4545FF" StrokeThickness="3" Opacity="0.4" />
+
+        <Ellipse Width="280" Height="280"
+                 HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                 Margin="500,0,0,-140"
+                 Fill="Transparent" Stroke="#4545FF" StrokeThickness="3" Opacity="0.4" />
+
+        <Ellipse Width="310" Height="310"
+                 HorizontalAlignment="Center" VerticalAlignment="Bottom"
+                 Margin="500,0,0,-155"
+                 Fill="Transparent" Stroke="#4545FF" StrokeThickness="3" Opacity="0.4" />
+
+        <Ellipse Width="40" Height="40"
+                 HorizontalAlignment="Center" VerticalAlignment="Top"
+                 Margin="-800,-20,0,0"
+                 Fill="Transparent" Stroke="#4545FF" StrokeThickness="3" Opacity="0.4" />
+
+        <Ellipse Width="70" Height="70"
+                 HorizontalAlignment="Center" VerticalAlignment="Top"
+                 Margin="-800,-35,0,0"
+                 Fill="Transparent" Stroke="#4545FF" StrokeThickness="3" Opacity="0.4" />
+
+        <Ellipse Width="100" Height="100"
+                 HorizontalAlignment="Center" VerticalAlignment="Top"
+                 Margin="-800,-50,0,0"
+                 Fill="Transparent" Stroke="#4545FF" StrokeThickness="3" Opacity="0.4" />
+
+        <Ellipse Width="130" Height="130"
+                 HorizontalAlignment="Center" VerticalAlignment="Top"
+                 Margin="-800,-65,0,0"
+                 Fill="Transparent" Stroke="#4545FF" StrokeThickness="3" Opacity="0.4" />
+
+        <Ellipse Width="160" Height="160"
+                 HorizontalAlignment="Center" VerticalAlignment="Top"
+                 Margin="-800,-80,0,0"
+                 Fill="Transparent" Stroke="#4545FF" StrokeThickness="3" Opacity="0.4" />
+
+        <Ellipse Width="190" Height="190"
+                 HorizontalAlignment="Center" VerticalAlignment="Top"
+                 Margin="-800,-95,0,0"
+                 Fill="Transparent" Stroke="#4545FF" StrokeThickness="3" Opacity="0.4" />
+
+        <Ellipse Width="220" Height="220"
+                 HorizontalAlignment="Center" VerticalAlignment="Top"
+                 Margin="-800,-110,0,0"
+                 Fill="Transparent" Stroke="#4545FF" StrokeThickness="3" Opacity="0.4" />
+
+        <Ellipse Width="250" Height="250"
+                 HorizontalAlignment="Center" VerticalAlignment="Top"
+                 Margin="-800,-125,0,0"
+                 Fill="Transparent" Stroke="#4545FF" StrokeThickness="3" Opacity="0.4" />
+
+        <Ellipse Width="280" Height="280"
+                 HorizontalAlignment="Center" VerticalAlignment="Top"
+                 Margin="-800,-140,0,0"
+                 Fill="Transparent" Stroke="#4545FF" StrokeThickness="3" Opacity="0.4" />
+
+        <Ellipse Width="310" Height="310"
+                 HorizontalAlignment="Center" VerticalAlignment="Top"
+                 Margin="-800,-155,0,0"
+                 Fill="Transparent" Stroke="#4545FF" StrokeThickness="3" Opacity="0.4" />
+
+        <Ellipse Width="40" Height="40"
+                 HorizontalAlignment="Right" VerticalAlignment="Center"
+                 Margin="0,200,-20,0"
+                 Fill="Transparent" Stroke="#4545FF" StrokeThickness="3" Opacity="0.4" />
+
+        <Ellipse Width="70" Height="70"
+                 HorizontalAlignment="Right" VerticalAlignment="Center"
+                 Margin="0,200,-35,0"
+                 Fill="Transparent" Stroke="#4545FF" StrokeThickness="3" Opacity="0.4" />
+
+        <Ellipse Width="100" Height="100"
+                 HorizontalAlignment="Right" VerticalAlignment="Center"
+                 Margin="0,200,-50,0"
+                 Fill="Transparent" Stroke="#4545FF" StrokeThickness="3" Opacity="0.4" />
+
+        <Ellipse Width="130" Height="130"
+                 HorizontalAlignment="Right" VerticalAlignment="Center"
+                 Margin="0,200,-65,0"
+                 Fill="Transparent" Stroke="#4545FF" StrokeThickness="3" Opacity="0.4" />
+
+        <Ellipse Width="160" Height="160"
+                 HorizontalAlignment="Right" VerticalAlignment="Center"
+                 Margin="0,200,-80,0"
+                 Fill="Transparent" Stroke="#4545FF" StrokeThickness="3" Opacity="0.4" />
+
+        <Ellipse Width="190" Height="190"
+                 HorizontalAlignment="Right" VerticalAlignment="Center"
+                 Margin="0,200,-95,0"
+                 Fill="Transparent" Stroke="#4545FF" StrokeThickness="3" Opacity="0.4" />
 
         <Ellipse Width="1200"
                  Height="1200"

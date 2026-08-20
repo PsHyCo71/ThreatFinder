@@ -35,7 +35,11 @@ public class ScanManager
             {
                 throw;
             }
-            catch (FileNotFoundException)
+            catch (UnauthorizedAccessException)
+            {
+                throw;
+            }
+            catch (IOException)
             {
                 throw;
             }
