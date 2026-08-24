@@ -12,8 +12,10 @@
         Title="ThreatFinder">
 
     <Panel>
+        <!-- Main background of the application. -->
         <Rectangle Fill="#9BD7EB" />
 
+        <!-- Decorative concentric circles positioned in the top-right corner. -->
         <Ellipse Width="60" Height="60"
                  HorizontalAlignment="Right" VerticalAlignment="Top"
                  Margin="0,-30,-30,0"
@@ -64,6 +66,7 @@
                  Margin="0,-210,-210,0"
                  Fill="Transparent" Stroke="#4545FF" StrokeThickness="3" Opacity="0.4" />
 
+        <!-- Decorative concentric circles positioned on the left side. -->
         <Ellipse Width="60" Height="60"
                  HorizontalAlignment="Left" VerticalAlignment="Center"
                  Margin="-30,0,0,0"
@@ -114,6 +117,7 @@
                  Margin="-210,0,0,0"
                  Fill="Transparent" Stroke="#4545FF" StrokeThickness="3" Opacity="0.4" />
 
+        <!-- Decorative concentric circles positioned along the bottom. -->
         <Ellipse Width="40" Height="40"
                  HorizontalAlignment="Center" VerticalAlignment="Bottom"
                  Margin="500,0,0,-20"
@@ -164,6 +168,7 @@
                  Margin="500,0,0,-155"
                  Fill="Transparent" Stroke="#4545FF" StrokeThickness="3" Opacity="0.4" />
 
+        <!-- Decorative concentric circles positioned along the top. -->
         <Ellipse Width="40" Height="40"
                  HorizontalAlignment="Center" VerticalAlignment="Top"
                  Margin="-800,-20,0,0"
@@ -214,6 +219,7 @@
                  Margin="-800,-155,0,0"
                  Fill="Transparent" Stroke="#4545FF" StrokeThickness="3" Opacity="0.4" />
 
+        <!-- Decorative concentric circles positioned on the right side. -->
         <Ellipse Width="40" Height="40"
                  HorizontalAlignment="Right" VerticalAlignment="Center"
                  Margin="0,200,-20,0"
@@ -244,6 +250,7 @@
                  Margin="0,200,-95,0"
                  Fill="Transparent" Stroke="#4545FF" StrokeThickness="3" Opacity="0.4" />
 
+        <!-- Large radial gradient used as the main central background effect. -->
         <Ellipse Width="1200"
                  Height="1200"
                  HorizontalAlignment="Center"
@@ -257,6 +264,7 @@
             </Ellipse.Fill>
         </Ellipse>
 
+        <!-- Radial gradient used as a decorative effect in the bottom-right corner. -->
         <Ellipse Width="400"
                  Height="400"
                  HorizontalAlignment="Right"
@@ -271,6 +279,7 @@
             </Ellipse.Fill>
         </Ellipse>
 
+        <!-- Radial gradient used as a decorative effect in the bottom-left corner. -->
         <Ellipse Width="400"
                  Height="400"
                  HorizontalAlignment="Left"
@@ -285,6 +294,7 @@
             </Ellipse.Fill>
         </Ellipse>
 
+        <!-- Displays the view associated with the current navigation state. -->
         <ContentControl Content="{Binding CurrentViewModel}" />
 
         <!-- Footer: anchored independently to the bottom of the Panel,
@@ -293,6 +303,7 @@
               ColumnDefinitions="*,*"
               Margin="20,0,20,20">
 
+            <!-- Displays information about the services used by ThreatFinder. -->
             <StackPanel Grid.Column="0"
                         Orientation="Vertical"
                         HorizontalAlignment="Left"
@@ -324,6 +335,7 @@
 
             </StackPanel>
 
+            <!-- Provides links to the project's GitHub resources. -->
             <StackPanel Grid.Column="1"
                         Orientation="Vertical"
                         HorizontalAlignment="Right"

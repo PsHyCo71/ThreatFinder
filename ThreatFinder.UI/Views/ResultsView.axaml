@@ -1,23 +1,33 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:core="using:ThreatFinder.Core"
+             xmlns:conv="using:ThreatFinder.UI"
              xmlns:vm="using:ThreatFinder.ViewModels"
              x:Class="ThreatFinder.Views.ResultsView"
              x:DataType="vm:ResultsViewModel">
 
+    <UserControl.Resources>
+        <!-- Converter used to display tag collections as comma-separated strings. -->
+        <conv:StringListJoinConverter x:Key="StringListJoinConverter" />
+    </UserControl.Resources>
+
     <Grid>
 
+        <!-- Main container for the scan results. -->
         <StackPanel HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Width="400">
 
+            <!-- Page title. -->
             <TextBlock Text="SCAN RESULTS"
                        FontSize="40"
                        FontWeight="Bold"
                        Foreground="Black"
                        HorizontalAlignment="Center"
-                       Margin="0,100,0,30" />
+                       Margin="0,0,0,30" />
 
-            <!-- <StackPanel Orientation="Horizontal"
+            <!-- Displays the target that was scanned. -->
+            <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Center"
                         Margin="0,0,0,20">
 
@@ -27,106 +37,85 @@
                            VerticalAlignment="Center"
                            Margin="0,0,10,0" />
 
-                <TextBox x:Name="MalwareBazaarTextBox"
-                         Text="{Binding MalwareBazaarKey}"
-                         IsReadOnly="{Binding !IsEditingMalwareBazaarKey}"
-                         CaretBrush="{Binding IsEditingMalwareBazaarKey, Converter={StaticResource BoolToCaretBrushConverter}}"
-                         Width="250"
-                         CornerRadius="25"
-                         Foreground="Black"
-                         FontSize="18"
-                         Background="LightBlue"
-                         BorderBrush="Blue"
-                         BorderThickness="2"
-                         VerticalAlignment="Center">
-
-                    <TextBox.KeyBindings>
-                        <KeyBinding Gesture="Enter"
-                                    Command="{Binding SaveKeyCommand}"
-                                    CommandParameter="MalwareBazaar" />
-                    </TextBox.KeyBindings>
-
-                </TextBox>
-
-                <Grid>
-                    <Button Content="+"
-                            Command="{Binding OpenEditCommand}"
-                            CommandParameter="MalwareBazaar"
-                            IsVisible="{Binding !IsEditingMalwareBazaarKey}"
-                            Width="36"
-                            CornerRadius="25"
-                            HorizontalContentAlignment="Center" />
-
-                    <Button Content="✓"
-                            Command="{Binding SaveKeyCommand}"
-                            CommandParameter="MalwareBazaar"
-                            IsVisible="{Binding IsEditingMalwareBazaarKey}"
-                            Width="36"
-                            CornerRadius="25"
-                            HorizontalContentAlignment="Center" />
-                </Grid>
-
-            </StackPanel>
-
-            <!- <StackPanel Orientation="Horizontal"
-                        HorizontalAlignment="Center">
-
-                <TextBlock Text="URLhaus:"
+                <!-- Displays the URL when the scan was performed on a URL. -->
+                <TextBlock Text="{Binding Result.Target}"
+                           IsVisible="{Binding !IsFileResult}"
                            Foreground="Black"
-                           FontSize="20"
+                           FontSize="18"
                            VerticalAlignment="Center"
-                           Margin="0,0,10,0" />
+                           Margin="0,0,10,0"
+                           MaxWidth="250"
+                           TextTrimming="CharacterEllipsis"
+                           ToolTip.Tip="{Binding Result.Target}"/>
 
-                <TextBox x:Name="URLhausTextBox"
-                         Text="{Binding UrlhausKey}"
-                         IsReadOnly="{Binding !IsEditingUrlhausKey}"
-                         CaretBrush="{Binding IsEditingUrlhausKey, Converter={StaticResource BoolToCaretBrushConverter}}"
-                         Width="250"
-                         CornerRadius="25"
-                         Foreground="Black"
-                         FontSize="18"
-                         Background="LightBlue"
-                         BorderBrush="Blue"
-                         BorderThickness="2"
-                         VerticalAlignment="Center">
-
-                    <TextBox.KeyBindings>
-                        <KeyBinding Gesture="Enter"
-                                    Command="{Binding SaveKeyCommand}"
-                                    CommandParameter="URLhaus" />
-                    </TextBox.KeyBindings>
-
-                </TextBox>
-
-                <Grid>
-                    <Button Content="+"
-                            Command="{Binding OpenEditCommand}"
-                            CommandParameter="URLhaus"
-                            IsVisible="{Binding !IsEditingUrlhausKey}"
-                            Width="36"
-                            CornerRadius="25"
-                            HorizontalContentAlignment="Center" />
-
-                    <Button Content="✓"
-                            Command="{Binding SaveKeyCommand}"
-                            CommandParameter="URLhaus"
-                            IsVisible="{Binding IsEditingUrlhausKey}"
-                            Width="36"
-                            CornerRadius="25"
-                            HorizontalContentAlignment="Center" />
-                </Grid>
+                <!-- Displays the selected file information when the scan was performed on a file. -->
+                <TextBlock Text="{Binding FileDisplayInfo}"
+                           IsVisible="{Binding IsFileResult}"
+                           Foreground="Black"
+                           FontSize="18"
+                           VerticalAlignment="Center"
+                           Margin="0,0,10,0"
+                           MaxWidth="250"
+                           TextTrimming="CharacterEllipsis"
+                           ToolTip.Tip="{Binding FileDisplayInfo}" />
 
             </StackPanel>
 
-            <TextBlock Margin="0,50"
-                       Foreground="Red"
-                       FontSize="20"
-                       TextWrapping="Wrap"
-                       TextAlignment="Center"
-                       Text="{Binding ErrorMessage}" /> -->
+            <!-- Displays the results returned by the available providers. -->
+            <ItemsControl ItemsSource="{Binding Result.Results}"
+                          HorizontalAlignment="Center">
+
+                <ItemsControl.DataTemplates>
+
+                    <!-- Template used when a provider identifies the target as malicious. -->
+                    <DataTemplate x:DataType="core:MaliciousResult">
+                        <StackPanel Margin="0,5" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <TextBlock Text="{Binding ProviderName}" FontWeight="Bold" Foreground="Black" FontSize="22" TextAlignment="Center"/>
+                            <TextBlock Text="{Binding ThreatType, StringFormat='Threat Type: {0}'}" Foreground="#B60000" FontSize="20" TextAlignment="Center"/>
+                            <TextBlock Text="{Binding Timestamp, StringFormat='Timestamp: {0}'}" Foreground="Black" FontSize="18" TextAlignment="Center"/>
+                            <TextBlock Text="{Binding Tags, StringFormat='Tags: {0}', Converter={StaticResource StringListJoinConverter}}"
+                                       Foreground="White"
+                                       FontSize="18"
+                                       HorizontalAlignment="Center"
+                                       MaxWidth="250"
+                                       TextTrimming="CharacterEllipsis"
+                                       ToolTip.Tip="{Binding Tags, Converter={StaticResource StringListJoinConverter}}"/>
+                        </StackPanel>
+                    </DataTemplate>
+
+                    <!-- Template used when a provider does not identify the target as malicious. -->
+                    <DataTemplate x:DataType="core:CleanResult">
+                        <StackPanel Margin="0,5" HorizontalAlignment="Center">
+                            <TextBlock Text="{Binding ProviderName}" FontWeight="Bold" Foreground="Black" FontSize="22" TextAlignment="Center"/>
+                            <TextBlock Text="{Binding Message}" Foreground="Lime" FontSize="20" TextWrapping="Wrap" TextAlignment="Center"/>
+                        </StackPanel>
+                    </DataTemplate>
+
+                    <!-- Template used when an error occurs while processing a provider result. -->
+                    <DataTemplate x:DataType="core:ErrorResult">
+                        <StackPanel Margin="0,5" HorizontalAlignment="Center">
+                            <TextBlock Text="{Binding ProviderName}" FontWeight="Bold" Foreground="Black" FontSize="22" TextAlignment="Center"/>
+                            <TextBlock Text="{Binding Message}" Foreground="White" FontSize="20" TextWrapping="Wrap" TextAlignment="Center"/>
+                        </StackPanel>
+                    </DataTemplate>
+
+                </ItemsControl.DataTemplates>
+
+            </ItemsControl>
+
+            <!-- Returns the user to the scan view. -->
+            <Button Padding="20,10"
+                    FontSize="16"
+                    HorizontalAlignment="Center"
+                    Margin="0,30,0,0"
+                    CornerRadius="25"
+                    Background="Gray"
+                    Command="{Binding GoToScanCommand}">
+                EXIT
+            </Button>
 
         </StackPanel>
 
     </Grid>
 
-</ UserControl>
+</UserControl>

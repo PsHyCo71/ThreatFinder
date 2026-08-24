@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="ThreatFinder.csproj" />
+  <Project Path="ThreatFinder.Tests/ThreatFinder.Tests.csproj" />
+</Solution>

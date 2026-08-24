@@ -6,13 +6,17 @@
              x:DataType="vm:SettingsViewModel">
 
     <UserControl.Resources>
+        <!-- Converter used to control the caret visibility while editing an API key. -->
         <converters:BoolToCaretBrushConverter x:Key="BoolToCaretBrushConverter" />
     </UserControl.Resources>
 
     <UserControl.Styles>
+        <!-- Changes the TextBox background when it receives keyboard focus. -->
         <Style Selector="TextBox:focus /template/ Border#PART_BorderElement">
             <Setter Property="Background" Value="LightBlue" />
         </Style>
+
+        <!-- Changes the TextBox background when the pointer is over it. -->
         <Style Selector="TextBox:pointerover /template/ Border#PART_BorderElement">
             <Setter Property="Background" Value="LightBlue" />
         </Style>
@@ -20,6 +24,7 @@
 
     <Grid>
 
+        <!-- Returns the user to the scan view. -->
         <Button HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Margin="20,20,0,0"
@@ -33,10 +38,12 @@
                    Height="40" />
         </Button>
 
+        <!-- Main container for the API key settings. -->
         <StackPanel HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Width="400">
 
+            <!-- Page title. -->
             <TextBlock Text="AUTH-KEYS"
                        FontSize="40"
                        FontWeight="Bold"
@@ -44,7 +51,7 @@
                        HorizontalAlignment="Center"
                        Margin="0,100,0,30" />
 
-            <!-- MalwareBazaar -->
+            <!-- MalwareBazaar API key settings. -->
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Center"
                         Margin="0,0,0,20">
@@ -55,28 +62,37 @@
                            VerticalAlignment="Center"
                            Margin="0,0,10,0" />
 
-                <TextBox x:Name="MalwareBazaarTextBox"
-                         Text="{Binding MalwareBazaarKey}"
-                         IsReadOnly="{Binding !IsEditingMalwareBazaarKey}"
-                         CaretBrush="{Binding IsEditingMalwareBazaarKey, Converter={StaticResource BoolToCaretBrushConverter}}"
-                         Width="250"
-                         CornerRadius="25"
-                         Foreground="Black"
-                         FontSize="18"
-                         Background="LightBlue"
-                         BorderBrush="Blue"
-                         BorderThickness="2"
-                         VerticalAlignment="Center">
+                <!-- Allows long API keys to be displayed and edited without affecting the layout. -->
+                <ScrollViewer HorizontalScrollBarVisibility="Hidden"
+                              VerticalScrollBarVisibility="Disabled"
+                              VerticalAlignment="Center">
 
-                    <TextBox.KeyBindings>
-                        <KeyBinding Gesture="Enter"
-                                    Command="{Binding SaveKeyCommand}"
-                                    CommandParameter="MalwareBazaar" />
-                    </TextBox.KeyBindings>
+                    <TextBox x:Name="MalwareBazaarTextBox"
+                             Text="{Binding MalwareBazaarKey}"
+                             IsReadOnly="{Binding !IsEditingMalwareBazaarKey}"
+                             CaretBrush="{Binding IsEditingMalwareBazaarKey, Converter={StaticResource BoolToCaretBrushConverter}}"
+                             Width="250"
+                             CornerRadius="25"
+                             Foreground="Black"
+                             FontSize="18"
+                             Background="LightBlue"
+                             BorderBrush="Blue"
+                             BorderThickness="2"
+                             VerticalAlignment="Center">
 
-                </TextBox>
+                        <!-- Allows the API key to be saved by pressing Enter. -->
+                        <TextBox.KeyBindings>
+                            <KeyBinding Gesture="Enter"
+                                        Command="{Binding SaveKeyCommand}"
+                                        CommandParameter="MalwareBazaar" />
+                        </TextBox.KeyBindings>
+
+                    </TextBox>
+
+                </ScrollViewer>
 
                 <Grid>
+                    <!-- Enables editing of the MalwareBazaar API key. -->
                     <Button Content="+"
                             Command="{Binding OpenEditCommand}"
                             CommandParameter="MalwareBazaar"
@@ -85,6 +101,7 @@
                             CornerRadius="25"
                             HorizontalContentAlignment="Center" />
 
+                    <!-- Saves the modified MalwareBazaar API key. -->
                     <Button Content="✓"
                             Command="{Binding SaveKeyCommand}"
                             CommandParameter="MalwareBazaar"
@@ -96,7 +113,7 @@
 
             </StackPanel>
 
-            <!-- URLhaus -->
+            <!-- URLhaus API key settings. -->
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Center">
 
@@ -119,6 +136,7 @@
                          BorderThickness="2"
                          VerticalAlignment="Center">
 
+                    <!-- Allows the API key to be saved by pressing Enter. -->
                     <TextBox.KeyBindings>
                         <KeyBinding Gesture="Enter"
                                     Command="{Binding SaveKeyCommand}"
@@ -128,6 +146,7 @@
                 </TextBox>
 
                 <Grid>
+                    <!-- Enables editing of the URLhaus API key. -->
                     <Button Content="+"
                             Command="{Binding OpenEditCommand}"
                             CommandParameter="URLhaus"
@@ -136,6 +155,7 @@
                             CornerRadius="25"
                             HorizontalContentAlignment="Center" />
 
+                    <!-- Saves the modified URLhaus API key. -->
                     <Button Content="✓"
                             Command="{Binding SaveKeyCommand}"
                             CommandParameter="URLhaus"
@@ -147,6 +167,7 @@
 
             </StackPanel>
 
+            <!-- Displays an error message when provided by the view model. -->
             <TextBlock Margin="0,50"
                        Foreground="Red"
                        FontSize="20"

@@ -8,14 +8,20 @@
              x:DataType="vm:ScanViewModel">
 
     <UserControl.Resources>
+        <!-- Converter used to compare the selected scan mode with a specific enum value. -->
         <converters:EnumEqualsConverter x:Key="EnumEqualsConverter" />
+
+        <!-- Converter used to change the file information text color when an error occurs. -->
         <converters:BoolToErrorColorConverter x:Key="BoolToErrorColorConverter" />
     </UserControl.Resources>
 
     <UserControl.Styles>
+        <!-- Changes the TextBox background when it receives keyboard focus. -->
         <Style Selector="TextBox:focus /template/ Border#PART_BorderElement">
             <Setter Property="Background" Value="LightBlue" />
         </Style>
+
+        <!-- Changes the TextBox background when the pointer is over it. -->
         <Style Selector="TextBox:pointerover /template/ Border#PART_BorderElement">
             <Setter Property="Background" Value="LightBlue" />
         </Style>
@@ -23,6 +29,7 @@
 
     <Grid>
 
+        <!-- Opens the application settings. -->
         <Button HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Margin="20,20,0,0"
@@ -35,9 +42,11 @@
                    Height="40" />
         </Button>
 
+        <!-- Main scan controls. -->
         <StackPanel HorizontalAlignment="Center"
                     VerticalAlignment="Center">
 
+            <!-- Buttons used to select the scan mode. -->
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Center">
 
@@ -61,6 +70,7 @@
 
             </StackPanel>
 
+            <!-- Text input used when scanning a URL. -->
             <TextBox HorizontalAlignment="Center"
                      TextAlignment="Center"
                      Margin="0,30,0,0"
@@ -75,6 +85,7 @@
                      Text="{Binding UrlInput}"
                      IsVisible="{Binding SelectedMode, Converter={StaticResource EnumEqualsConverter}, ConverterParameter={x:Static vm:ScanViewModel+ScanMode.Url}}" />
 
+            <!-- File selection area displayed when file scanning is selected. -->
             <Border HorizontalAlignment="Center"
                     Margin="0,30,0,0"
                     Width="400"
@@ -85,6 +96,7 @@
                     BorderThickness="2"
                     IsVisible="{Binding SelectedMode, Converter={StaticResource EnumEqualsConverter}, ConverterParameter={x:Static vm:ScanViewModel+ScanMode.File}}">
 
+                <!-- Displays the selected file name and size. -->
                 <ScrollViewer HorizontalScrollBarVisibility="Hidden"
                               VerticalScrollBarVisibility="Disabled"
                               VerticalAlignment="Center">
@@ -99,6 +111,7 @@
 
                 </ScrollViewer>
 
+                <!-- Opens the file picker when the file selection area is clicked. -->
                 <i:Interaction.Behaviors>
                     <ia:EventTriggerBehavior EventName="PointerPressed">
                         <ia:InvokeCommandAction Command="{Binding PickFileCommand}" />
@@ -106,16 +119,19 @@
                 </i:Interaction.Behaviors>
             </Border>
 
+            <!-- Starts the scan using the selected scan mode and input. -->
             <Button Padding="20,10"
                     FontSize="16"
                     HorizontalAlignment="Center"
                     Margin="0,30,0,0"
                     CornerRadius="25"
                     Background="Red"
+                    IsDefault="True"
                     Command="{Binding ScanCommand}">
                 SCAN
             </Button>
 
+            <!-- Displays an indeterminate progress bar while a scan is running. -->
             <ProgressBar IsIndeterminate="True"
                          IsVisible="{Binding IsScanning}"
                          Width="200"

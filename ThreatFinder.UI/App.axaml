@@ -3,13 +3,20 @@
              x:Class="ThreatFinder.App"
              xmlns:local="using:ThreatFinder"
              RequestedThemeVariant="Default">
-             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+
+    <!--
+    "Default" follows the system theme variant.
+    "Dark" and "Light" can be used to explicitly select a theme.
+    -->
 
     <Application.DataTemplates>
+        <!-- Registers the view locator used to associate view models with their views. -->
         <local:ViewLocator />
     </Application.DataTemplates>
 
     <Application.Styles>
+        <!-- Applies Avalonia's Fluent theme to the application. -->
         <FluentTheme />
     </Application.Styles>
+
 </Application>
