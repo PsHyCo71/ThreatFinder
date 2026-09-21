@@ -4,6 +4,8 @@ using System.IO;
 using System;
 using System.Threading.Tasks;
 using ThreatFinder.Core;
+using Avalonia;
+using Avalonia.Styling;
 
 namespace ThreatFinder.ViewModels;
 
@@ -232,5 +234,22 @@ public partial class ScanViewModel : ViewModelBase
             FileError = true;
             FileDisplayInfo = ex.Message;
         }
+    }
+
+     /// <summary>
+    /// Toggles the application's theme between Light and Dark mode.
+    /// </summary>
+    [RelayCommand]
+    private void ToggleTheme()
+    {
+        // Gets the current Avalonia application instance.
+        var app = Application.Current!;
+
+        // Checks the current theme:
+        // if it is Dark, switches to Light;
+        // otherwise, switches to Dark.
+        app.RequestedThemeVariant = app.ActualThemeVariant == ThemeVariant.Dark
+            ? ThemeVariant.Light
+            : ThemeVariant.Dark;
     }
 }

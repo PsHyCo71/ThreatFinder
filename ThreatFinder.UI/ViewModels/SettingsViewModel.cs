@@ -2,6 +2,8 @@ using System;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Avalonia;
+using Avalonia.Styling;
 using ThreatFinder.Core;
 
 namespace ThreatFinder.ViewModels;
@@ -157,4 +159,22 @@ public partial class SettingsViewModel : ViewModelBase
                 throw new ArgumentException($"Unknown provider: {providerName}");
         }
     }
+
+    /// <summary>
+    /// Toggles the application's theme between Light and Dark mode.
+    /// </summary>
+    [RelayCommand]
+    private void ToggleTheme()
+    {
+        // Gets the current Avalonia application instance.
+        var app = Application.Current!;
+
+        // Checks the current theme:
+        // if it is Dark, switches to Light;
+        // otherwise, switches to Dark.
+        app.RequestedThemeVariant = app.ActualThemeVariant == ThemeVariant.Dark
+            ? ThemeVariant.Light
+            : ThemeVariant.Dark;
+    }
+
 }

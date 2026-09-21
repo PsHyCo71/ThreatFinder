@@ -132,7 +132,7 @@ public class URLhausProvider : IThreatIntelProvider
             // Handles any other status returned by the URLhaus API as an error.
             _ => new ErrorResult("URLhaus")
             {
-                Message = $"Error: URLhaus endpoint returned the follwing error '{queryStatus}' "
+                Message = $"Error: URLhaus endpoint returned the following error '{queryStatus}' "
             }
         };
     }
