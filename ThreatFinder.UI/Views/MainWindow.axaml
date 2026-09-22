@@ -12,33 +12,62 @@
         Title="ThreatFinder">
 
     <Window.Resources>
+
         <ResourceDictionary>
+
+            <!-- Defines resources that change depending on the current application theme. -->
             <ResourceDictionary.ThemeDictionaries>
 
+                <!-- Resources used when the Light theme is active. -->
                 <ResourceDictionary x:Key="Light">
+
+                    <!-- Main application background color. -->
                     <SolidColorBrush x:Key="AppBackground" Color="#9BD7EB" />
+
+                    <!-- Color used for the decorative ring. -->
                     <SolidColorBrush x:Key="RingBrush" Color="#4545FF" />
+
+                    <!-- Color used for footer text. -->
                     <SolidColorBrush x:Key="FooterText" Color="Black" />
+
+                    <!-- Colors used to create the light-theme glow effect. -->
                     <Color x:Key="GlowCenterBig">Blue</Color>
                     <Color x:Key="GlowCenter">#6495ED</Color>
                     <Color x:Key="GlowMid">Cyan</Color>
                     <Color x:Key="GlowEdge">Transparent</Color>
+
+                    <!-- Controls the final position of the glow gradient. -->
                     <x:Double x:Key="GlowEndOffset">1</x:Double>
+
                 </ResourceDictionary>
 
+                <!-- Resources used when the Dark theme is active. -->
                 <ResourceDictionary x:Key="Dark">
+
+                    <!-- Main application background color. -->
                     <SolidColorBrush x:Key="AppBackground" Color="#2B2B2B" />
+
+                    <!-- Color used for the decorative ring. -->
                     <SolidColorBrush x:Key="RingBrush" Color="#7B2CBF" />
+
+                    <!-- Color used for footer text. -->
                     <SolidColorBrush x:Key="FooterText" Color="White" />
+
+                    <!-- Colors used to create the dark-theme glow effect. -->
                     <Color x:Key="GlowCenterBig">Purple</Color>
                     <Color x:Key="GlowCenter">#7B2CBF</Color>
                     <Color x:Key="GlowMid">#7B2CBF</Color>
                     <Color x:Key="GlowEdge">#007B2CBF</Color>
+
+                    <!-- Controls the final position of the glow gradient. -->
                     <x:Double x:Key="GlowEndOffset">0.7</x:Double>
+
                 </ResourceDictionary>
 
             </ResourceDictionary.ThemeDictionaries>
+
         </ResourceDictionary>
+
     </Window.Resources>
 
     <Panel>

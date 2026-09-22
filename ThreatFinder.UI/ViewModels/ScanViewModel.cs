@@ -235,8 +235,8 @@ public partial class ScanViewModel : ViewModelBase
             FileDisplayInfo = ex.Message;
         }
     }
-
-     /// <summary>
+	
+    /// <summary>
     /// Toggles the application's theme between Light and Dark mode.
     /// </summary>
     [RelayCommand]

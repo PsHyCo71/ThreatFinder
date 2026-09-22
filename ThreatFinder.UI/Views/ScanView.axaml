@@ -51,7 +51,7 @@
                    Width="40"
                    Height="40" />
         </Button>
-        
+
         <!-- TogToggles the application's theme between Light and Dark mode. -->
         <Button HorizontalAlignment="Right"
                 VerticalAlignment="Top"
@@ -87,6 +87,7 @@
                         FontSize="16"
                         CornerRadius="25"
                         Command="{Binding SelectModeCommand}"
+                        Foreground="White"
                         CommandParameter="{x:Static vm:ScanViewModel+ScanMode.Url}">
                     URL
                 </Button>
@@ -96,6 +97,7 @@
                         FontSize="16"
                         CornerRadius="25"
                         Command="{Binding SelectModeCommand}"
+                        Foreground="White"
                         CommandParameter="{x:Static vm:ScanViewModel+ScanMode.File}">
                     FILE
                 </Button>
@@ -159,6 +161,7 @@
                     CornerRadius="25"
                     Background="Red"
                     IsDefault="True"
+                    Foreground="White"
                     Command="{Binding ScanCommand}">
                 SCAN
             </Button>

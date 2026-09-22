@@ -126,7 +126,7 @@ public class URLhausProvider : IThreatIntelProvider
             // "no_results" indicates that the URL was not found in the URLhaus database.
             "no_results" => new CleanResult("URLhaus")
             {
-                Message = "The submitted URL has not been found on URLhaus database, this results indicate that it is safe."
+                Message = "The submitted URL has not been found on URLhaus database. This may indicate that the file is safe, or that it has not yet been discovered or reported."
             },
 
             // Handles any other status returned by the URLhaus API as an error.
